@@ -2,6 +2,7 @@
 // 'extends' the Sprite class
 
 var Enemy = function(dx, dy) {
+    "use strict";
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     // The image/sprite for our enemies, this uses
@@ -20,7 +21,7 @@ var Enemy = function(dx, dy) {
     Sprite.call(this, enemy_defaults);
 
     // Make the bugs move at different speeds
-    this.speed = 100+Math.random()*200;
+    this.speed = 100 + Math.random() * 200;
 
     // What state to change to after the player hits the bug
     this.nextState = 'lose';
@@ -36,7 +37,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.dx += this.speed*dt;
+    this.dx += this.speed * dt;
 
     // Draw the bug
     this.render();

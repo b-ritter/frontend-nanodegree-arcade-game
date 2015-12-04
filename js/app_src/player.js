@@ -3,7 +3,8 @@
 // enemies.
 
 var Player = function(options) {
-
+  "use strict";
+  
   var player_options = {
     sprite: playerImg,
     dWidth: 70,
@@ -24,6 +25,9 @@ var Player = function(options) {
 
   // All other Sprites
   this.otherSprites = options.otherSprites || [];
+
+  // Player goal:
+  this.GOAL = 73;
 };
 
 Player.prototype = Object.create(Sprite.prototype);
@@ -67,19 +71,19 @@ Player.prototype.handleInput = function(key) {
 };
 
 Player.prototype.checkCollsions = function() {
-  var player = this;
+  var self = this;
   this.otherSprites.forEach( function(sprite) {
-    if (player.dx < sprite.dx + sprite.dWidth &&
-      player.dx + player.dWidth > sprite.dx &&
-      player.dy < sprite.dy + sprite.dHeight &&
-      player.dy + player.dHeight > sprite.dy) {
+    if (self.dx < sprite.dx + sprite.dWidth &&
+      self.dx + self.dWidth > sprite.dx &&
+      self.dy < sprite.dy + sprite.dHeight &&
+      self.dy + self.dHeight > sprite.dy) {
         currentState = sprite.nextState;
     }
   });
 };
 
 Player.prototype.checkForWin = function(dt) {
-  if (this.dy < 73 ) {
+  if (this.dy < this.GOAL ) {
     currentState = 'win';
   }
 };

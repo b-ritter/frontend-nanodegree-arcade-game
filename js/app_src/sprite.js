@@ -8,8 +8,10 @@
 // welcome panel to the bugs and player.
 // Several of its properties match the
 // Canvas object's. Sprite takes an options object.
-var Sprite = function(options) {
+//(function(){
+//"use strict";
 
+var Sprite = function(options) {
   // Coordinates for game stage
   this['dx-default'] = this.dx = options.dx;
   this['dy-default'] = this.dy = options.dy;

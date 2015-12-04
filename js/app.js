@@ -8,8 +8,10 @@
 // welcome panel to the bugs and player.
 // Several of its properties match the
 // Canvas object's. Sprite takes an options object.
-var Sprite = function(options) {
+//(function(){
+//"use strict";
 
+var Sprite = function(options) {
   // Coordinates for game stage
   this['dx-default'] = this.dx = options.dx;
   this['dy-default'] = this.dy = options.dy;
@@ -169,10 +171,10 @@ Stage.prototype.update = function(dt) {
 // Check if the click point is within the Button bounding box
 Stage.prototype.checkButtons = function(loc) {
   // 'that' refers to the stage
-  var that = this;
+  var self = this;
   this.sprites.forEach(function(sprite){
     if(sprite.clickable){
-      that.checkButtonHit(loc, sprite);
+      self.checkButtonHit(loc, sprite);
     }
   });
 };
@@ -273,6 +275,7 @@ var Welcome = new Stage({
 // 'extends' the Sprite class
 
 var Enemy = function(dx, dy) {
+    "use strict";
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     // The image/sprite for our enemies, this uses
@@ -291,7 +294,7 @@ var Enemy = function(dx, dy) {
     Sprite.call(this, enemy_defaults);
 
     // Make the bugs move at different speeds
-    this.speed = 100+Math.random()*200;
+    this.speed = 100 + Math.random() * 200;
 
     // What state to change to after the player hits the bug
     this.nextState = 'lose';
@@ -307,7 +310,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.dx += this.speed*dt;
+    this.dx += this.speed * dt;
 
     // Draw the bug
     this.render();
@@ -323,7 +326,8 @@ Enemy.prototype.update = function(dt) {
 // enemies.
 
 var Player = function(options) {
-
+  "use strict";
+  
   var player_options = {
     sprite: playerImg,
     dWidth: 70,
@@ -344,6 +348,9 @@ var Player = function(options) {
 
   // All other Sprites
   this.otherSprites = options.otherSprites || [];
+
+  // Player goal:
+  this.GOAL = 73;
 };
 
 Player.prototype = Object.create(Sprite.prototype);
@@ -387,19 +394,19 @@ Player.prototype.handleInput = function(key) {
 };
 
 Player.prototype.checkCollsions = function() {
-  var player = this;
+  var self = this;
   this.otherSprites.forEach( function(sprite) {
-    if (player.dx < sprite.dx + sprite.dWidth &&
-      player.dx + player.dWidth > sprite.dx &&
-      player.dy < sprite.dy + sprite.dHeight &&
-      player.dy + player.dHeight > sprite.dy) {
+    if (self.dx < sprite.dx + sprite.dWidth &&
+      self.dx + self.dWidth > sprite.dx &&
+      self.dy < sprite.dy + sprite.dHeight &&
+      self.dy + self.dHeight > sprite.dy) {
         currentState = sprite.nextState;
     }
   });
 };
 
 Player.prototype.checkForWin = function(dt) {
-  if (this.dy < 73 ) {
+  if (this.dy < this.GOAL ) {
     currentState = 'win';
   }
 };

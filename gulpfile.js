@@ -15,8 +15,7 @@ var app_js = [
   'player.js',
   'play.js',
   'scorekeeper.js',
-  'player-select.js',
-  'init.js'
+  'player-select.js'
 ];
 
 app_js.forEach(function(currentValue, index, app_js){

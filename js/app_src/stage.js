@@ -49,10 +49,10 @@ Stage.prototype.update = function(dt) {
 // Check if the click point is within the Button bounding box
 Stage.prototype.checkButtons = function(loc) {
   // 'that' refers to the stage
-  var that = this;
+  var self = this;
   this.sprites.forEach(function(sprite){
     if(sprite.clickable){
-      that.checkButtonHit(loc, sprite);
+      self.checkButtonHit(loc, sprite);
     }
   });
 };
